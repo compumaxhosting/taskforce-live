@@ -10,6 +10,28 @@ import {
 } from "react-icons/fa";
 import Map from "./Map";
 
+/* =========================
+   Safe response typing utils
+   ========================= */
+type FieldErrors = Record<string, string>;
+
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return typeof v === "object" && v !== null;
+}
+
+function hasFieldErrors(v: unknown): v is { fieldErrors: FieldErrors } {
+  if (!isRecord(v)) return false;
+  const fe = (v as Record<string, unknown>).fieldErrors;
+  if (!isRecord(fe)) return false;
+  return Object.values(fe).every((val) => typeof val === "string");
+}
+
+function hasError(v: unknown): v is { error: string } {
+  return (
+    isRecord(v) && typeof (v as Record<string, unknown>).error === "string"
+  );
+}
+
 /* ---------- tiny custom select (no packages) ---------- */
 function CustomSelect({
   name,
@@ -144,7 +166,8 @@ function CustomSelect({
 }
 /* ------------------------------------------------------ */
 
-/* --- CustomSelect stays unchanged (your code is fine) --- */
+/* --- ContactUs (with upgraded client-side validation & no `any`) --- */
+type FormType = "message" | "partner";
 
 export default function ContactUs() {
   const connectionTypes = [
@@ -152,6 +175,7 @@ export default function ContactUs() {
     { label: "Join the Team (HR)", value: "hr" },
     { label: "Sub-contractor", value: "subcontractor" },
   ];
+
   const [selectedType, setSelectedType] = useState<{
     label: string;
     value: string;
@@ -161,20 +185,38 @@ export default function ContactUs() {
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
-    formType: string
+    formType: FormType
   ) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    // read hidden input written by CustomSelect
+    const connectionType = formData.get("connectionType")?.toString() || "";
+
     const data: Record<string, string> = {};
     formData.forEach((value, key) => {
-      data[key] = value.toString();
+      data[key] = value.toString().trim();
     });
 
-    if (!data.name || !data.email || !data.message) {
-      setMessage("⚠️ Please fill all required fields.");
+    // Client-side guards
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || "");
+    if (
+      !data.name ||
+      !emailOk ||
+      !(data.message && data.message.length >= 10)
+    ) {
+      setMessage(
+        "⚠️ Please provide a valid name, email, and a message (≥ 10 chars)."
+      );
+      setLoading(false);
+      return;
+    }
+    if (formType === "partner" && !connectionType) {
+      setMessage("⚠️ Please select a connection type.");
       setLoading(false);
       return;
     }
@@ -183,23 +225,34 @@ export default function ContactUs() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, formType }),
+        body: JSON.stringify({
+          ...data,
+          formType, // "message" | "partner"
+        }),
       });
 
-      const result = await res.json();
+      const result: unknown = await res.json();
+
       if (res.ok) {
         setMessage("✅ Message sent successfully!");
-        e.currentTarget.reset();
-        setSelectedType(null);
+        form.reset();
+        setSelectedType(null); // reset your CustomSelect
+      } else if (res.status === 422 && hasFieldErrors(result)) {
+        const firstErr =
+          Object.values(result.fieldErrors)[0] ?? "Validation failed";
+        setMessage(`❌ ${firstErr}`);
+      } else if (hasError(result)) {
+        setMessage(`❌ Error: ${result.error}`);
       } else {
-        setMessage(`❌ Error: ${result.error || "Something went wrong"}`);
+        setMessage("❌ Error: Something went wrong");
       }
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";
       setMessage(`❌ Failed to send message: ${errorMessage}`);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
