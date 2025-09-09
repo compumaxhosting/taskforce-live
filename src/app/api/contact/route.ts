@@ -1,9 +1,9 @@
 // app/api/contact/route.ts
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { Resend } from "resend";
+import { Resend, type CreateEmailResponse } from "resend";
 
-export const runtime = "nodejs"; // Resend SDK is happiest on Node runtime
+export const runtime = "nodejs"; // Resend SDK prefers Node runtime
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -94,6 +94,11 @@ function renderTextEmail(d: z.infer<typeof Schema>) {
     .join("\n");
 }
 
+// tiny helper so a weird replyTo never crashes the SDK
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const safeReplyTo = (addr: string) =>
+  emailRegex.test(addr) ? addr : undefined;
+
 export async function POST(req: Request) {
   try {
     // 1) Basic JSON guard
@@ -112,7 +117,6 @@ export async function POST(req: Request) {
       const fieldErrors: Record<string, string> = {};
       for (const issue of parsed.error.issues) {
         const key = issue.path.join(".") || "form";
-        // Only keep the first error per field to keep it clean
         if (!fieldErrors[key]) fieldErrors[key] = issue.message;
       }
       return NextResponse.json(
@@ -122,10 +126,18 @@ export async function POST(req: Request) {
     }
     const data = parsed.data;
 
-    // 3) Environment sanity
+    // 3) Environment sanity + DEBUG LOGS
     const FROM = process.env.FROM_EMAIL;
     const TO = process.env.TO_EMAIL;
     const KEY = process.env.RESEND_API_KEY;
+
+    console.log("CONTACT_ENV", {
+      FROM,
+      TO,
+      KEY_PRESENT: Boolean(KEY),
+      RUNTIME: process.env.VERCEL ? "vercel" : "local",
+    });
+
     if (!FROM || !TO || !KEY) {
       return NextResponse.json(
         { error: "Email service not configured on server" },
@@ -150,26 +162,36 @@ export async function POST(req: Request) {
     const toRecipients = TO.split(",")
       .map((s) => s.trim())
       .filter(Boolean);
-    const sendResult = await resend.emails.send({
-      from: FROM, // e.g. "onboarding@resend.dev" (must be verified/signed with Resend)
-      to: toRecipients, // one or more internal recipients
-      replyTo: data.email, // so you can reply directly
-      subject,
-      html,
-      text,
-    });
+
+    let sendResult: CreateEmailResponse;
+    try {
+      sendResult = await resend.emails.send({
+        from: FROM, // MUST be on your verified domain, e.g. no-reply@mail.taskforceinteriors.com
+        to: toRecipients,
+        replyTo: safeReplyTo(data.email),
+        subject,
+        html,
+        text,
+      });
+    } catch (sdkErr) {
+      console.error("RESEND_SDK_THROWN", sdkErr);
+      return NextResponse.json(
+        { error: "Email service error (SDK threw)" },
+        { status: 502 }
+      );
+    }
 
     if (sendResult.error) {
-      // Resend SDK returns { error } on failures
+      console.error("RESEND_ERROR", sendResult.error);
       return NextResponse.json(
         { error: sendResult.error.message || "Email service error" },
         { status: 502 }
       );
     }
 
-    // 6) Optional: lightweight auto-reply to sender (nice touch)
+    // 6) Optional: lightweight auto-reply (best-effort)
     try {
-      await resend.emails.send({
+      const autoReply = await resend.emails.send({
         from: FROM,
         to: data.email,
         subject:
@@ -178,8 +200,11 @@ export async function POST(req: Request) {
             : "We received your partner inquiry",
         text: "Thanks for contacting Task Force Interiors. Our team will get back to you shortly.",
       });
-    } catch {
-      // Ignore auto-reply errors silently; not critical
+      if (autoReply.error) {
+        console.warn("RESEND_AUTOREPLY_WARN", autoReply.error);
+      }
+    } catch (autoReplyErr) {
+      console.warn("RESEND_AUTOREPLY_THROWN", autoReplyErr);
     }
 
     return NextResponse.json({ ok: true });
