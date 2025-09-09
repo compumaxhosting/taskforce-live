@@ -158,7 +158,7 @@ export async function POST(req: Request) {
     const html = renderHtmlEmail(data);
     const text = renderTextEmail(data);
 
-    // 5) Send to you
+    // 5) Send to multiple recipients
     const toRecipients = TO.split(",")
       .map((s) => s.trim())
       .filter(Boolean);
@@ -166,7 +166,7 @@ export async function POST(req: Request) {
     let sendResult: CreateEmailResponse;
     try {
       sendResult = await resend.emails.send({
-        from: FROM, // MUST be on your verified domain, e.g. no-reply@mail.taskforceinteriors.com
+        from: FROM,
         to: toRecipients,
         replyTo: safeReplyTo(data.email),
         subject,
@@ -189,7 +189,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 6) Optional: lightweight auto-reply (best-effort)
+    // 6) Optional: lightweight auto-reply to user
     try {
       const autoReply = await resend.emails.send({
         from: FROM,
