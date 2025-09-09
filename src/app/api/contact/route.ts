@@ -5,8 +5,6 @@ import { Resend, type CreateEmailResponse } from "resend";
 
 export const runtime = "nodejs"; // Resend SDK prefers Node runtime
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const ConnectionTypeEnum = z.enum(["supplier", "hr", "subcontractor"]);
 
 const BaseSchema = z.object({
@@ -94,14 +92,25 @@ function renderTextEmail(d: z.infer<typeof Schema>) {
     .join("\n");
 }
 
-// tiny helper so a weird replyTo never crashes the SDK
+/* ---------- helpers ---------- */
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const safeReplyTo = (addr: string) =>
   emailRegex.test(addr) ? addr : undefined;
 
+function parseRecipients(raw: string | undefined): string[] {
+  if (!raw) return [];
+  const uniq = new Set(
+    raw
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0 && emailRegex.test(s))
+  );
+  return Array.from(uniq);
+}
+
 export async function POST(req: Request) {
   try {
-    // 1) Basic JSON guard
+    // 1) Content-Type guard
     const contentType = req.headers.get("content-type") || "";
     if (!contentType.includes("application/json")) {
       return NextResponse.json(
@@ -110,7 +119,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2) Parse & validate
+    // 2) Validate payload
     const raw = await req.json();
     const parsed = Schema.safeParse(raw);
     if (!parsed.success) {
@@ -126,11 +135,12 @@ export async function POST(req: Request) {
     }
     const data = parsed.data;
 
-    // 3) Environment sanity + DEBUG LOGS
-    const FROM = process.env.FROM_EMAIL;
-    const TO = process.env.TO_EMAIL;
+    // 3) Environment sanity
+    const FROM = process.env.FROM_EMAIL; // e.g. no-reply@mail.taskforceinteriors.com  (must be on verified domain)
+    const TO = process.env.TO_EMAIL; // comma separated
     const KEY = process.env.RESEND_API_KEY;
 
+    // debug log
     console.log("CONTACT_ENV", {
       FROM,
       TO,
@@ -145,6 +155,9 @@ export async function POST(req: Request) {
       );
     }
 
+    // ⚠️ instantiate Resend *after* env check so builds don't blow up
+    const resend = new Resend(KEY);
+
     // 4) Compose email
     const subject =
       data.formType === "message"
@@ -158,16 +171,21 @@ export async function POST(req: Request) {
     const html = renderHtmlEmail(data);
     const text = renderTextEmail(data);
 
-    // 5) Send to multiple recipients
-    const toRecipients = TO.split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
+    // 5) Recipients (supports 4+ emails)
+    const toRecipients = parseRecipients(TO);
+    if (toRecipients.length === 0) {
+      return NextResponse.json(
+        { error: "No valid recipients configured" },
+        { status: 500 }
+      );
+    }
 
+    // 6) Send to your internal recipients
     let sendResult: CreateEmailResponse;
     try {
       sendResult = await resend.emails.send({
-        from: FROM,
-        to: toRecipients,
+        from: FROM, // MUST be your verified domain
+        to: toRecipients, // ["a@x.com","b@y.com","..."]
         replyTo: safeReplyTo(data.email),
         subject,
         html,
@@ -189,7 +207,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 6) Optional: lightweight auto-reply to user
+    // 7) Optional: auto-reply to user (best-effort)
     try {
       const autoReply = await resend.emails.send({
         from: FROM,
@@ -215,4 +233,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-} 
+}
