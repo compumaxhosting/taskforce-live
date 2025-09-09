@@ -144,6 +144,8 @@ function CustomSelect({
 }
 /* ------------------------------------------------------ */
 
+/* --- CustomSelect stays unchanged (your code is fine) --- */
+
 export default function ContactUs() {
   const connectionTypes = [
     { label: "Supplier", value: "supplier" },
@@ -154,11 +156,56 @@ export default function ContactUs() {
     label: string;
     value: string;
   } | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+    formType: string
+  ) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    const formData = new FormData(e.currentTarget);
+    const data: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      data[key] = value.toString();
+    });
+
+    if (!data.name || !data.email || !data.message) {
+      setMessage("⚠️ Please fill all required fields.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, formType }),
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        setMessage("✅ Message sent successfully!");
+        e.currentTarget.reset();
+        setSelectedType(null);
+      } else {
+        setMessage(`❌ Error: ${result.error || "Something went wrong"}`);
+      }
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      setMessage(`❌ Failed to send message: ${errorMessage}`);
+    }
+    setLoading(false);
+  };
 
   return (
     <section className="bg-[#eef9f9] py-16 px-4">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-8">
-        {/* Left - Contact Form (unchanged) */}
+        {/* Left - Contact Form */}
         <div className="pb-10">
           <h2 className="text-3xl md:text-5xl text-center text-[#c18832] mb-2">
             Send Us A Message
@@ -168,43 +215,54 @@ export default function ContactUs() {
             message and we&apos;ll respond as soon as possible.
           </p>
 
-          <form className="space-y-6">
+          <form
+            className="space-y-6"
+            onSubmit={(e) => handleSubmit(e, "message")}
+          >
             <div className="flex flex-col sm:flex-row gap-4">
               <input
+                name="name"
                 type="text"
                 placeholder="Your Name"
+                required
                 className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
               />
               <input
+                name="email"
                 type="email"
                 placeholder="Your Email"
+                required
                 className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
               />
             </div>
 
             <input
+              name="subject"
               type="text"
               placeholder="Subject"
               className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
             />
 
             <textarea
+              name="message"
               rows={5}
               placeholder="Message"
+              required
               className="w-full border border-gray-300 px-4 py-3 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#c18832]"
             />
 
             <button
               type="submit"
+              disabled={loading}
               className="bg-[#c18832] text-white px-6 py-3 rounded hover:bg-[#a97322] transition inline-flex items-center gap-2"
             >
               <FaPaperPlane className="text-white" />
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
 
-        {/* Right - Partner With Us (uses CustomSelect) */}
+        {/* Right - Partner With Us */}
         <div className="pb-10">
           <h2 className="text-3xl md:text-5xl text-center text-[#c18832] mb-2">
             Partner With Us
@@ -214,27 +272,34 @@ export default function ContactUs() {
             subcontractor.
           </p>
 
-          <form className="space-y-6">
+          <form
+            className="space-y-6"
+            onSubmit={(e) => handleSubmit(e, "partner")}
+          >
             <div className="flex flex-col sm:flex-row gap-4">
               <input
+                name="name"
                 type="text"
                 placeholder="Full Name / Company Name"
+                required
                 className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
               />
               <input
+                name="email"
                 type="email"
                 placeholder="Email"
+                required
                 className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
               />
             </div>
 
             <input
+              name="phone"
               type="tel"
               placeholder="Phone Number"
               className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
             />
 
-            {/* Replaces <select> */}
             <CustomSelect
               name="connectionType"
               options={connectionTypes}
@@ -244,21 +309,28 @@ export default function ContactUs() {
             />
 
             <textarea
+              name="message"
               rows={5}
               placeholder="Tell us more (experience, offerings, etc.)"
+              required
               className="w-full border border-gray-300 px-4 py-3 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#c18832]"
             />
 
             <button
               type="submit"
+              disabled={loading}
               className="bg-[#c18832] text-white px-6 py-3 rounded hover:bg-[#a97322] transition inline-flex items-center gap-2"
             >
               <FaPaperPlane className="text-white" />
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </form>
         </div>
       </div>
+
+      {message && (
+        <p className="text-center mt-6 font-medium text-gray-700">{message}</p>
+      )}
 
       {/* Contact Info */}
       <div className="max-w-5xl mx-auto mt-16 bg-white shadow-md rounded-lg p-10">
@@ -296,10 +368,11 @@ export default function ContactUs() {
                 href="mailto:info@taskforceinteriors.com"
                 className="hover:underline font-open-sans"
               >
-                info@taskforceinteriors.com  <br />
+                info@taskforceinteriors.com
               </a>
+              <br />
               <a
-                href="mailto:info@taskforceinteriors.com"
+                href="mailto:business@taskforceinteriors.com"
                 className="hover:underline font-open-sans"
               >
                 business@taskforceinteriors.com
