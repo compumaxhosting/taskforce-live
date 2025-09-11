@@ -260,56 +260,90 @@ export default function ContactUs() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-8">
         {/* Left - Contact Form */}
         <div className="pb-10">
-          <h2 className="text-3xl md:text-5xl text-center text-[#c18832] mb-2">
+          <h2
+            className="text-3xl md:text-5xl text-center text-[#c18832] mb-2"
+            id="contact-form-heading"
+          >
             Send Us A Message
           </h2>
-          <p className="text-center text-gray-600 mb-10 font-open-sans">
+          <p
+            className="text-center text-gray-600 mb-10 font-open-sans"
+            id="contact-form-desc"
+          >
             Have a project in mind? We&apos;d love to hear from you. Send us a
             message and we&apos;ll respond as soon as possible.
           </p>
 
           <form
             className="space-y-6"
+            aria-labelledby="contact-form-heading"
+            aria-describedby="contact-form-desc"
             onSubmit={(e) => handleSubmit(e, "message")}
+            noValidate
           >
             <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
+                <label htmlFor="contact-name" className="sr-only">
+                  Your Name
+                </label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  placeholder="Your Name"
+                  required
+                  className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+                />
+              </div>
+              <div className="flex-1">
+                <label htmlFor="contact-email" className="sr-only">
+                  Your Email
+                </label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  placeholder="Your Email"
+                  required
+                  className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="contact-subject" className="sr-only">
+                Subject
+              </label>
               <input
-                name="name"
+                id="contact-subject"
+                name="subject"
                 type="text"
-                placeholder="Your Name"
-                required
-                className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
-              />
-              <input
-                name="email"
-                type="email"
-                placeholder="Your Email"
-                required
-                className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+                placeholder="Subject"
+                className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
               />
             </div>
 
-            <input
-              name="subject"
-              type="text"
-              placeholder="Subject"
-              className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
-            />
-
-            <textarea
-              name="message"
-              rows={5}
-              placeholder="Message"
-              required
-              className="w-full border border-gray-300 px-4 py-3 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#c18832]"
-            />
+            <div>
+              <label htmlFor="contact-message" className="sr-only">
+                Message
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={5}
+                placeholder="Message"
+                required
+                className="w-full border border-gray-300 px-4 py-3 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+              />
+            </div>
 
             <button
               type="submit"
               disabled={loading}
+              aria-busy={loading}
               className="bg-[#c18832] text-white px-6 py-3 rounded hover:bg-[#a97322] transition inline-flex items-center gap-2"
             >
-              <FaPaperPlane className="text-white" />
+              <FaPaperPlane className="text-white" aria-hidden="true" />
               {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
@@ -317,64 +351,104 @@ export default function ContactUs() {
 
         {/* Right - Partner With Us */}
         <div className="pb-10">
-          <h2 className="text-3xl md:text-5xl text-center text-[#c18832] mb-2">
+          <h2
+            className="text-3xl md:text-5xl text-center text-[#c18832] mb-2"
+            id="partner-form-heading"
+          >
             Partner With Us
           </h2>
-          <p className="text-center text-gray-600 mb-10 font-open-sans">
+          <p
+            className="text-center text-gray-600 mb-10 font-open-sans"
+            id="partner-form-desc"
+          >
             Connect as a supplier, apply to join our team, or register as a
             subcontractor.
           </p>
 
           <form
             className="space-y-6"
+            aria-labelledby="partner-form-heading"
+            aria-describedby="partner-form-desc"
             onSubmit={(e) => handleSubmit(e, "partner")}
+            noValidate
           >
             <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
+                <label htmlFor="partner-name" className="sr-only">
+                  Full Name / Company Name
+                </label>
+                <input
+                  id="partner-name"
+                  name="name"
+                  type="text"
+                  placeholder="Full Name / Company Name"
+                  required
+                  className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+                />
+              </div>
+              <div className="flex-1">
+                <label htmlFor="partner-email" className="sr-only">
+                  Email
+                </label>
+                <input
+                  id="partner-email"
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  required
+                  className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="partner-phone" className="sr-only">
+                Phone Number
+              </label>
               <input
-                name="name"
-                type="text"
-                placeholder="Full Name / Company Name"
-                required
-                className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
-              />
-              <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                required
-                className="flex-1 border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+                id="partner-phone"
+                name="phone"
+                type="tel"
+                placeholder="Phone Number"
+                className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
               />
             </div>
 
-            <input
-              name="phone"
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full border border-gray-300 px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-[#c18832]"
-            />
+            {/* Custom select: make sure your component passes through aria-label/aria-labelledby */}
+            <div>
+              <label htmlFor="partner-connection-type" className="sr-only">
+                Connection Type
+              </label>
+              <CustomSelect
+                name="connectionType"
+                options={connectionTypes}
+                value={selectedType}
+                onChange={setSelectedType}
+                placeholder="Select Connection Type"
+              />
+            </div>
 
-            <CustomSelect
-              name="connectionType"
-              options={connectionTypes}
-              value={selectedType}
-              onChange={setSelectedType}
-              placeholder="Select Connection Type"
-            />
-
-            <textarea
-              name="message"
-              rows={5}
-              placeholder="Tell us more (experience, offerings, etc.)"
-              required
-              className="w-full border border-gray-300 px-4 py-3 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#c18832]"
-            />
+            <div>
+              <label htmlFor="partner-message" className="sr-only">
+                Tell us more (experience, offerings, etc.)
+              </label>
+              <textarea
+                id="partner-message"
+                name="message"
+                rows={5}
+                placeholder="Tell us more (experience, offerings, etc.)"
+                required
+                className="w-full border border-gray-300 px-4 py-3 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#c18832]"
+              />
+            </div>
 
             <button
               type="submit"
               disabled={loading}
+              aria-busy={loading}
               className="bg-[#c18832] text-white px-6 py-3 rounded hover:bg-[#a97322] transition inline-flex items-center gap-2"
             >
-              <FaPaperPlane className="text-white" />
+              <FaPaperPlane className="text-white" aria-hidden="true" />
               {loading ? "Submitting..." : "Submit"}
             </button>
           </form>
@@ -382,65 +456,80 @@ export default function ContactUs() {
       </div>
 
       {message && (
-        <p className="text-center mt-6 font-medium text-gray-700">{message}</p>
+        <p
+          className="text-center mt-6 font-medium text-gray-700"
+          role="status"
+          aria-live="polite"
+        >
+          {message}
+        </p>
       )}
 
       {/* Contact Info */}
       <div className="max-w-5xl mx-auto mt-16 bg-white shadow-md rounded-lg p-10">
-        <h3 className="text-3xl md:text-4xl text-[#c18832] mb-8 text-center">
+        <h3
+          id="contact-info-heading"
+          className="text-3xl md:text-4xl text-[#c18832] mb-8 text-center"
+        >
           Contact Info
         </h3>
 
-        <div className="grid sm:grid-cols-2 gap-8 text-gray-700">
-          <div className="flex items-start gap-3">
-            <FaMapMarkerAlt className="text-[#c18832] mt-1" />
-            <div>
-              <p className="font-medium text-[#c18832]">Our Location</p>
-              <p className="font-open-sans">Hyderabad, Telangana, India</p>
-            </div>
-          </div>
+        <address aria-labelledby="contact-info-heading" className="not-italic">
+          <ul className="grid sm:grid-cols-2 gap-8 text-gray-700" role="list">
+            <li className="flex items-start gap-3">
+              <FaMapMarkerAlt
+                className="text-[#c18832] mt-1"
+                aria-hidden="true"
+              />
+              <div>
+                <p className="font-medium text-[#c18832]">Our Location</p>
+                <p className="font-open-sans">Hyderabad, Telangana, India</p>
+              </div>
+            </li>
 
-          <div className="flex items-start gap-3">
-            <FaPhoneAlt className="text-[#c18832] mt-1" />
-            <div>
-              <p className="font-medium text-[#c18832]">Call Us</p>
-              <a
-                href="tel:04023240629"
-                className="hover:underline font-open-sans"
-              >
-                040-23240629
-              </a>
-            </div>
-          </div>
+            <li className="flex items-start gap-3">
+              <FaPhoneAlt className="text-[#c18832] mt-1" aria-hidden="true" />
+              <div>
+                <p className="font-medium text-[#c18832]">Call Us</p>
+                <a
+                  href="tel:+914023240629"
+                  className="hover:underline font-open-sans"
+                  aria-label="Call 040 2324 0629"
+                >
+                  040-23240629
+                </a>
+              </div>
+            </li>
 
-          <div className="flex items-start gap-3">
-            <FaEnvelope className="text-[#c18832] mt-1" />
-            <div>
-              <p className="font-medium text-[#c18832]">Email Us</p>
-              <a
-                href="mailto:info@taskforceinteriors.com"
-                className="hover:underline font-open-sans"
-              >
-                info@taskforceinteriors.com
-              </a>
-              <br />
-              <a
-                href="mailto:business@taskforceinteriors.com"
-                className="hover:underline font-open-sans"
-              >
-                business@taskforceinteriors.com
-              </a>
-            </div>
-          </div>
+            <li className="flex items-start gap-3">
+              <FaEnvelope className="text-[#c18832] mt-1" aria-hidden="true" />
+              <div>
+                <p className="font-medium text-[#c18832]">Email Us</p>
+                <a
+                  href="mailto:info@taskforceinteriors.com"
+                  className="hover:underline font-open-sans"
+                >
+                  info@taskforceinteriors.com
+                </a>
+                <br />
+                <a
+                  href="mailto:business@taskforceinteriors.com"
+                  className="hover:underline font-open-sans"
+                >
+                  business@taskforceinteriors.com
+                </a>
+              </div>
+            </li>
 
-          <div className="flex items-start gap-3">
-            <FaClock className="text-[#c18832] mt-1" />
-            <div>
-              <p className="font-medium text-[#c18832]">Working Hours</p>
-              <p className="font-open-sans">Mon - Sat: 9AM - 6PM</p>
-            </div>
-          </div>
-        </div>
+            <li className="flex items-start gap-3">
+              <FaClock className="text-[#c18832] mt-1" aria-hidden="true" />
+              <div>
+                <p className="font-medium text-[#c18832]">Working Hours</p>
+                <p className="font-open-sans">Mon - Sat: 9AM - 6PM</p>
+              </div>
+            </li>
+          </ul>
+        </address>
 
         <p className="text-sm text-center text-gray-500 mt-10">
           Get in touch for turnkey interior solutions
