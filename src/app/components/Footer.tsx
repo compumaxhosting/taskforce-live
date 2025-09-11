@@ -10,12 +10,12 @@ export default function Footer() {
   return (
     <footer className="bg-[#eef9f9] text-[#000000] text-md">
       <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
-        {/* Logo Only - Full Size */}
+        {/* Logo Only */}
         <div className="w-full flex items-center">
           <Image
             src="/logo.png"
             alt="Taskforce Logo"
-            width={800} // Adjust if needed
+            width={800}
             height={200}
             className="w-full h-auto object-contain"
           />
@@ -57,38 +57,43 @@ export default function Footer() {
             </a>
           </p>
 
+          {/* Social Links with accessible names */}
           <div className="flex gap-2 mt-4">
             <a
               href="https://www.facebook.com/p/Taskforce-Interiors-61574866478910/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our Facebook page"
               className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <FaFacebookF size={16} />
+              <FaFacebookF size={16} aria-hidden="true" />
             </a>
             <a
               href="https://twitter.com/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our X (Twitter) profile"
               className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <SiX size={16} />
+              <SiX size={16} aria-hidden="true" />
             </a>
             <a
               href="https://www.instagram.com/taskforceinteriors17/?hl=en"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our Instagram profile"
               className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <FaInstagram size={16} />
+              <FaInstagram size={16} aria-hidden="true" />
             </a>
             <a
               href="https://www.linkedin.com/company/taskforceinteriors/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our LinkedIn page"
               className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <FaLinkedinIn size={16} />
+              <FaLinkedinIn size={16} aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -106,7 +111,7 @@ export default function Footer() {
               ❯ <Link href="/aboutus">About Us</Link>
             </li>
             <li>
-              ❯ <Link href="/ourteam">Our Team</Link>
+              ❯ <Link href="/ourteam">Our Team</Link>
             </li>
             <li>
               ❯ <Link href="/gallery">Our Projects</Link>
@@ -124,7 +129,7 @@ export default function Footer() {
             <li>
               ❯{" "}
               <Link href="/ourequipments" className="hover:text-yellow-700">
-                Manufacturing Plant
+                Manufacturing Plant
               </Link>
             </li>
             <li>

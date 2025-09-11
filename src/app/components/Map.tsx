@@ -10,11 +10,12 @@ export default function Map() {
         <div className="w-full h-[300px] md:h-[350px] rounded-lg overflow-hidden shadow-md">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7614.491589221127!2d78.477833!3d17.399988!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99deba49f73b%3A0x5862b9a2bff5334c!2sTASK%20FORCE%20INTERIORS%20PVT%20LTD.!5e0!3m2!1sen!2sin!4v1754490831636!5m2!1sen!2sin"
+            title="Google Map showing Task Force Interiors Pvt. Ltd. location in Hyderabad"
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             className="w-full h-full border-0"
-          ></iframe>
+          />
         </div>
       </div>
     </section>

@@ -80,7 +80,7 @@ export default function AboutOurOrganization() {
             Our Strengths at a Glance:
           </h3>
 
-          {/* First 3 bullets (always visible) */}
+          {/* Bullets */}
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm md:text-base text-gray-800 font-open-sans">
             {[
               "30+ years of industry experience in delivering end-to-end fit-out solutions",
@@ -89,7 +89,10 @@ export default function AboutOurOrganization() {
               "Proven track record of on-time delivery with uncompromised quality and safety standards",
             ].map((item, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <FaCheck className="mt-1 shrink-0 text-[#c28b2c]" />
+                <FaCheck
+                  className="mt-1 shrink-0 text-[#c28b2c]"
+                  aria-hidden="true"
+                />
                 <span>{item}</span>
               </li>
             ))}
@@ -103,10 +106,13 @@ export default function AboutOurOrganization() {
               }`}
               aria-hidden={!expanded}
             >
-              {/* Hidden content starts here */}
+              {/* Hidden content */}
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm md:text-base text-gray-800 font-open-sans mt-3">
                 <li className="flex items-start gap-2">
-                  <FaCheck className="mt-1 shrink-0 text-[#c28b2c]" />
+                  <FaCheck
+                    className="mt-1 shrink-0 text-[#c28b2c]"
+                    aria-hidden="true"
+                  />
                   <span>
                     Long-standing partnerships with top architects, developers,
                     and PMC
@@ -126,16 +132,10 @@ export default function AboutOurOrganization() {
 
                 <p className="text-gray-700 leading-relaxed text-base font-open-sans md:text-justify">
                   At <span className="font-semibold">Task Force Interiors</span>
-                  , we stand for
-                  <span className="font-semibold">
-                    {" "}
-                    quality, transparency,
-                  </span>{" "}
-                  and
-                  <span className="font-semibold">
-                    {" "}
-                    long-term relationships
-                  </span>
+                  , we stand for{" "}
+                  <span className="font-semibold">quality, transparency,</span>{" "}
+                  and{" "}
+                  <span className="font-semibold">long-term relationships</span>
                   . Our focus remains on creating functional, sustainable, and
                   aesthetically superior spaces that exceed expectations.
                 </p>
@@ -150,39 +150,52 @@ export default function AboutOurOrganization() {
                   </Link>
                 </div>
 
-                {/* Socials */}
-                <div className="flex gap-3 pt-4">
+                {/* Socials (fixed: unique labels + icons hidden) */}
+                <nav aria-label="Follow us" className="flex gap-3 pt-4">
                   {[
                     {
+                      name: "Facebook",
                       icon: FaFacebookF,
                       url: "https://www.facebook.com/p/Taskforce-Interiors-61574866478910/",
+                      label: "Visit our Facebook page",
                     },
-                    { icon: SiX, url: "https://twitter.com/" },
                     {
+                      name: "X (Twitter)",
+                      icon: SiX,
+                      url: "https://twitter.com/",
+                      label: "Visit our X (Twitter) profile",
+                    },
+                    {
+                      name: "Instagram",
                       icon: FaInstagram,
                       url: "https://www.instagram.com/taskforceinteriors17/?hl=en",
+                      label: "Visit our Instagram profile",
                     },
                     {
+                      name: "LinkedIn",
                       icon: FaLinkedinIn,
                       url: "https://www.linkedin.com/company/taskforceinteriors/",
+                      label: "Visit our LinkedIn page",
                     },
-                  ].map(({ icon: Icon, url }, idx) => (
+                  ].map(({ name, icon: Icon, url, label }) => (
                     <a
-                      key={idx}
+                      key={name}
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 border border-[#c28b2c] text-[#c28b2c] flex items-center justify-center text-base hover:bg-[#c28b2c] hover:text-white transition"
-                      aria-label="Social link"
+                      aria-label={label}
+                      className="w-10 h-10 border border-[#c28b2c] text-[#c28b2c] flex items-center justify-center text-base hover:bg-[#c28b2c] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-[#c28b2c]/60"
+                      title={name}
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5" aria-hidden="true" />
                     </a>
                   ))}
-                </div>
+                </nav>
               </div>
             </div>
 
             <button
+              type="button"
               onClick={() => setExpanded((v) => !v)}
               aria-expanded={expanded}
               className="mt-3 inline-flex items-center gap-2 text-[#c28b2c] font-semibold hover:underline"
