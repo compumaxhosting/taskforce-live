@@ -63,37 +63,33 @@ export default function Footer() {
               href="https://www.facebook.com/p/Taskforce-Interiors-61574866478910/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit our Facebook page"
-              className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
+              className="border border-[#c9974b] text-[#1877F2] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <FaFacebookF size={16} aria-hidden="true" />
+              <FaFacebookF size={16} />
             </a>
             <a
               href="https://twitter.com/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit our X (Twitter) profile"
-              className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
+              className="border border-[#c9974b] text-black p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <SiX size={16} aria-hidden="true" />
+              <SiX size={16} />
             </a>
             <a
-              href="https://www.instagram.com/taskforceinteriors17/?hl=en"
+              href="https://www.instagram.com/taskforce.interiors/?igsh=MWx4MDJ0c2NycGpqeg%3D%3D#"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit our Instagram profile"
-              className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
+              className="border border-[#c9974b] text-[#E4405F] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <FaInstagram size={16} aria-hidden="true" />
+              <FaInstagram size={16} />
             </a>
             <a
-              href="https://www.linkedin.com/company/taskforceinteriors/"
+              href="https://in.linkedin.com/company/taskforceinteriors"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit our LinkedIn page"
-              className="border border-[#c9974b] text-[#c9974b] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
+              className="border border-[#c9974b] text-[#0A66C2] p-2 hover:bg-[#c9974b] hover:text-[#221001] transition"
             >
-              <FaLinkedinIn size={16} aria-hidden="true" />
+              <FaLinkedinIn size={16} />
             </a>
           </div>
         </div>

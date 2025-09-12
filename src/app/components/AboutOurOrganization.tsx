@@ -168,13 +168,13 @@ export default function AboutOurOrganization() {
                     {
                       name: "Instagram",
                       icon: FaInstagram,
-                      url: "https://www.instagram.com/taskforceinteriors17/?hl=en",
+                      url: "https://www.instagram.com/taskforce.interiors/?igsh=MWx4MDJ0c2NycGpqeg%3D%3D#",
                       label: "Visit our Instagram profile",
                     },
                     {
                       name: "LinkedIn",
                       icon: FaLinkedinIn,
-                      url: "https://www.linkedin.com/company/taskforceinteriors/",
+                      url: "https://in.linkedin.com/company/taskforceinteriors",
                       label: "Visit our LinkedIn page",
                     },
                   ].map(({ name, icon: Icon, url, label }) => (
