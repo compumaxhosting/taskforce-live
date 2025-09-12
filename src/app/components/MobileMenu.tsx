@@ -6,6 +6,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { SiX } from "react-icons/si";
 import { useMemo, useRef, useState, useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 type NavLink = {
   label: string;
@@ -108,7 +109,15 @@ export default function MobileMenu({
     >
       {/* Logo */}
       <div className="mb-6 flex justify-center">
-        <Image src="/logo.png" alt="Logo" width={140} height={50} priority />
+        <Link href="/" aria-label="Go to homepage">
+          <Image
+            src="/logo.png"
+            alt="taskforce interiors logo"
+            width={140}
+            height={50}
+            priority
+          />
+        </Link>
       </div>
 
       {/* Main nav links */}
