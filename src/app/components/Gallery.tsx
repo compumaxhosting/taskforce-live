@@ -52,9 +52,9 @@ export default function Gallery() {
   return (
     <section className="bg-[#eef9f9] py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-5xl mb-10 text-center">
+        <h1 className="text-3xl md:text-5xl mb-10 text-center">
           Our Project <span className="text-yellow-600">GALLERY</span>
-        </h2>
+        </h1>
 
         <div className="flex flex-wrap justify-center gap-6">
           {projects.map((project, index) => (

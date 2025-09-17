@@ -155,7 +155,7 @@ export default function CompleteRangeOfServices() {
                 height={48}
                 className="mb-3"
               />
-              <h5 className="text-xl font-semibold mb-1">{service.name}</h5>
+              <h1 className="text-xl font-semibold mb-1">{service.name}</h1>
               <p className="text-base leading-relaxed font-open-sans">
                 {service.desc}
               </p>

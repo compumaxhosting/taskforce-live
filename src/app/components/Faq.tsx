@@ -56,10 +56,10 @@ export default function Faq() {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
                 <FaQuestionCircle className="text-yellow-600" />
                 {question}
-              </h3>
+              </h1>
               <p className="mt-2 text-gray-700 text-base font-open-sans md:text-justify leading-relaxed">
                 {answer}
               </p>

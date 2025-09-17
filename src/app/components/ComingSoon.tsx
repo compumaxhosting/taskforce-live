@@ -38,12 +38,12 @@ export default function ComingSoon() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-800">
+          <h1 className="text-3xl md:text-5xl font-bold text-gray-800">
             <span className="bg-[#e6f0ef] text-[#c28b2c] px-3 mr-2">
               COMING
             </span>
             <span className="text-black">SOON</span>
-          </h2>
+          </h1>
           <p className="text-gray-700 text-base font-open-sans leading-relaxed">
             We&apos;re building something amazing for you. Stay tuned while we
             put the final touches on our brand-new experience.

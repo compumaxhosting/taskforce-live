@@ -49,12 +49,12 @@ export default function GalleryTwo() {
     <div className="px-6 py-12 bg-white">
       {/* Content Section */}
       <div className="max-w-6xl mx-auto mb-12 text-center">
-        <h2 className="text-3xl md:text-5xl text-gray-800 mb-6">
+        <h1 className="text-3xl md:text-5xl text-gray-800 mb-6">
           <span className="bg-[#e6f0ef] text-[#c28b2c] px-2 mr-2">
             Manufacturing Excellence at
           </span>
           <span className="text-black">Task Force Interiors</span>
-        </h2>
+        </h1>
 
         <p className="text-gray-700 leading-relaxed text-lg font-open-sans text-justify ">
           At <strong> [Task Force Interiors]</strong>, our in-house
@@ -64,9 +64,9 @@ export default function GalleryTwo() {
           giving our clients a seamless experience from design to execution.
         </p>
         <div className="space-y-2">
-          <h3 className="text-xl md:text-2xl font-semibold text-[#c28b2c] text-center">
+          <h2 className="text-xl md:text-2xl font-semibold text-[#c28b2c] text-center">
             Our Facilities &amp; Capabilities
-          </h3>
+          </h2>
 
           <ul className="list-disc list-inside text-gray-700 leading-relaxed md:text-justify space-y-2 font-open-sans">
             <li>
@@ -109,9 +109,9 @@ export default function GalleryTwo() {
 
           {/* In-House Manufacturing Advantage */}
           <div className="space-y-2">
-            <h3 className="text-xl md:text-2xl font-semibold text-[#c28b2c] text-center">
+            <h4 className="text-xl md:text-2xl font-semibold text-[#c28b2c] text-center">
               The Advantage of In-House Manufacturing
-            </h3>
+            </h4>
 
             <ul className="list-disc list-inside text-gray-700 leading-relaxed md:text-justify space-y-2 font-open-sans">
               <li>
@@ -139,10 +139,10 @@ export default function GalleryTwo() {
               <strong> speed, precision, and unmatched value.</strong>
             </p>
             <div className="space-y-4 pt-6">
-              <h3 className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
+              <h5 className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
                 <Award className="w-6 h-6 text-[#c28b2c]" />
                 Our Certifications
-              </h3>
+              </h5>
               <Certificates />
             </div>
           </div>

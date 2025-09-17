@@ -56,10 +56,10 @@ export default function AboutOurOrganization() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl text-gray-800">
+          <h1 className="text-3xl md:text-5xl text-gray-800">
             <span className="bg-[#e6f0ef] text-[#c28b2c] px-2 mr-2">ABOUT</span>
             <span className="text-black">Our Organization</span>
-          </h2>
+          </h1>
 
           <p className="text-gray-700 leading-relaxed text-base font-open-sans md:text-justify">
             <span className="font-semibold">Task Force Interiors</span> is a
@@ -76,9 +76,9 @@ export default function AboutOurOrganization() {
             India.
           </p>
 
-          <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
             Our Strengths at a Glance:
-          </h3>
+          </h2>
 
           {/* Bullets */}
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm md:text-base text-gray-800 font-open-sans">

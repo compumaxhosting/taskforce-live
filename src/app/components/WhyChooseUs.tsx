@@ -52,17 +52,17 @@ export default function WhyChooseUs() {
   return (
     <section className="w-full px-4 py-16 bg-white" id="why-choose-us">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl md:text-5xl mb-12">
+        <h1 className="text-3xl md:text-5xl mb-12">
           Why People{" "}
           <span className="bg-[#e6f0ef] text-[#c28b2c] px-2">CHOOSE US</span>
-        </h2>
+        </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
           {features.map((feature, index) => (
             <div key={index} className="flex flex-col items-center">
               {feature.icon}
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">
                 {feature.title}
-              </h3>
+              </h2>
               <p className="text-gray-600 text-base leading-relaxed max-w-xs font-open-sans md:text-justify">
                 {feature.description}
               </p>

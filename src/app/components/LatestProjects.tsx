@@ -74,12 +74,12 @@ export default function LatestProjects() {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row">
         {/* Left Section */}
         <div className="bg-[#bf852b] text-white p-10 lg:w-1/3 flex flex-col justify-center items-start space-y-6 min-h-[450px]">
-          <h2 id="latest-projects-heading" className="text-4xl font-light">
+          <h1 id="latest-projects-heading" className="text-4xl font-light">
             Our Latest{" "}
             <span className="bg-white text-[#bf852b] px-2 font-semibold">
               PROJECTS
             </span>
-          </h2>
+          </h1>
           <p
             className="text-7xl font-light font-open-sans"
             aria-describedby="projects-count-sr"

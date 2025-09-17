@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Eye, Target, Award } from "lucide-react"; // 👈 Added Award icon for Certifications
-import Image from "next/image";
-import Certificates from "./certificates";
+// import Image from "next/image";
+// import Certificates from "./certificates";
 import MapVideo from "./MapVideo";
 import CertificatesDuo from "./CertificatesDuo";
 
@@ -19,16 +19,16 @@ export default function AboutTwo() {
           className="space-y-6"
         >
           {/* Heading */}
-          <h2 className="text-3xl md:text-5xl text-gray-800 text-center">
+          <h1  className="text-3xl md:text-5xl text-gray-800 text-center">
             <span className="bg-[#e6f0ef] text-[#c28b2c] px-2 mr-2">ABOUT</span>
             <span className="text-black">Task Force Interiors</span>
-          </h2>
+          </h1>
 
           {/* Introduction */}
           <div className="space-y-2">
-            <h3 className="text-xl md:text-2xl font-semibold text-gray-900 text-center">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 text-center">
               Introduction
-            </h3>
+            </h2>
 
             <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
               <strong>Task Force Interior (P) Ltd.</strong> is a leading name in
@@ -98,17 +98,17 @@ export default function AboutTwo() {
               Our focus remains on creating functional, sustainable, and
               aesthetically superior spaces that exceed expectations.
             </p>
-            <h3 className="flex items-center justify-center gap-2 text-xl md:text-3xl font-semibold text-[#c28b2c]">
+            <h4 className="flex items-center justify-center gap-2 text-xl md:text-3xl font-semibold text-[#c28b2c]">
               &quot;Your Partner in End-to-End Interior Fit-Out.&quot;
-            </h3>
+            </h4>
           </div>
 
           {/* Vision */}
           <div className="space-y-2">
-            <h3 className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
+            <h5 className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
               <Eye className="w-6 h-6 text-[#c28b2c]" />
               Our Vision
-            </h3>
+            </h5>
             <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
               Our vision is to be recognized as one of India’s most dependable
               and innovative interior solutions companies. We aim to design and
@@ -122,10 +122,10 @@ export default function AboutTwo() {
 
           {/* Mission */}
           <div className="space-y-2">
-            <h3 className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
+            <h6 className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
               <Target className="w-6 h-6 text-[#c28b2c]" />
               Our Mission
-            </h3>
+            </h6>
             <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
               Our mission is to provide complete turnkey interior solutions
               under one roof, right from concept to final execution. With a
@@ -141,10 +141,10 @@ export default function AboutTwo() {
           </div>
 
           {/* Certifications */}
-          <h3 className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
+          <p className="flex items-center justify-center gap-2 text-xl md:text-2xl font-semibold text-[#c28b2c]">
                 <Award className="w-6 h-6 text-[#c28b2c]" />
                 Our Certifications
-              </h3>
+              </p>
 <CertificatesDuo />
           <div className="max-w-sm w-full mx-auto">
             <MapVideo />

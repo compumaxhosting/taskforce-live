@@ -23,9 +23,9 @@ export default function Footer() {
 
         {/* Get In Touch */}
         <div>
-          <h4 className="text-black text-2xl font-semibold mb-4">
+          <h1 className="text-black text-2xl font-semibold mb-4">
             Get In Touch
-          </h4>
+          </h1>
           <p className="mb-1 font-open-sans">📍 3-5-823, Ground Floor</p>
           <p className="mb-1 font-open-sans">Hyderabad Business Center</p>
           <p className="mb-1 font-open-sans">Hyderguda Hyderabad - 500029</p>
@@ -96,9 +96,9 @@ export default function Footer() {
 
         {/* Popular Link */}
         <div>
-          <h4 className="text-black text-2xl font-semibold mb-4">
+          <h2 className="text-black text-2xl font-semibold mb-4">
             Popular Links
-          </h4>
+          </h2>
           <ul className="space-y-2 text-black">
             <li>
               ❯ <Link href="/">Home</Link>
@@ -120,7 +120,7 @@ export default function Footer() {
 
         {/* Our Services */}
         <div>
-          <h4 className="text-black text-2xl font-semibold mb-4">More</h4>
+          <h3 className="text-black text-2xl font-semibold mb-4">More</h3>
           <ul className="space-y-2 text-gray-800">
             <li>
               ❯{" "}

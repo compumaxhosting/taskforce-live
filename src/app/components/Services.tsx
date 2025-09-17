@@ -8,12 +8,12 @@ export default function Services() {
     <section className="w-full px-4 py-10 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
-        <h2 className="text-3xl md:text-5xl text-black mb-6">
+        <h1 className="text-3xl md:text-5xl text-black mb-6">
           Interior Fit-Out{" "}
           <span className="px-2 py-1 bg-[#e6f0ef] text-[#be892c]">
             SERVICES
           </span>
-        </h2>
+        </h1>
 
         {/* Layout wrapper: Left Content + Right Cards */}
         <div className="flex flex-col md:flex-row gap-8">
@@ -99,7 +99,7 @@ const ServiceCard = ({ title, description, color }: CardProps) => {
           !isYellow,
       })}
     >
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <h2 className="text-lg font-semibold mb-2">{title}</h2>
       <p className="text-sm leading-relaxed font-open-sans">{description}</p>
     </div>
   );

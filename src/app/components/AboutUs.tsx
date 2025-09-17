@@ -17,10 +17,10 @@ export default function AboutUs() {
           className="space-y-6"
         >
           {/* Heading */}
-          <h2 className="text-3xl md:text-5xl text-gray-800 text-center">
+          <h1 className="text-3xl md:text-5xl text-gray-800 text-center">
             <span className="bg-[#e6f0ef] text-[#c28b2c] px-2 mr-2">WHY</span>
             <span className="text-black">Choose Us</span>
-          </h2>
+          </h1>
 
           {/* Intro */}
           <p className="text-gray-700 leading-relaxed text-base md:text-lg md:text-justify font-open-sans">
@@ -42,9 +42,9 @@ export default function AboutUs() {
             <div className="space-y-6">
               {/* 1 */}
               <div className="space-y-2">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
                   1. Over 30 Years of Unmatched Experience
-                </h3>
+                </h2>
                 <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
                   For more than three decades, Task Force Interiors has been
                   setting benchmarks in design innovation, execution quality,
@@ -71,9 +71,9 @@ export default function AboutUs() {
 
               {/* 3 */}
               <div className="space-y-2">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
+                <h4 className="text-xl md:text-2xl font-semibold text-gray-900">
                   3. State-of-the-Art Manufacturing
-                </h3>
+                </h4>
                 <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
                   Our{" "}
                   <strong>2-acre manufacturing facility in Hyderabad</strong>{" "}
@@ -86,9 +86,9 @@ export default function AboutUs() {
 
               {/* 4 */}
               <div className="space-y-2">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
+                <h5 className="text-xl md:text-2xl font-semibold text-gray-900">
                   4. Pan-India Project Delivery
-                </h3>
+                </h5>
                 <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
                   With a proven footprint of{" "}
                   <strong>over 20 million sq. ft.</strong> of completed projects
@@ -100,9 +100,9 @@ export default function AboutUs() {
 
               {/* 5 */}
               <div className="space-y-2">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
+                <h6 className="text-xl md:text-2xl font-semibold text-gray-900">
                   5. End-to-End Turnkey Expertise
-                </h3>
+                </h6>
                 <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
                   From concept and design to manufacturing and execution, we
                   handle it all under one roof. This integrated approach
@@ -113,9 +113,9 @@ export default function AboutUs() {
 
               {/* 6 */}
               <div className="space-y-2">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
+                <p className="text-xl md:text-2xl font-semibold text-gray-900">
                   6. Commitment to Quality & Long-Term Relationships
-                </h3>
+                </p>
                 <p className="text-gray-700 leading-relaxed md:text-justify font-open-sans">
                   Our success is measured not just by completed projects but by
                   the lasting partnerships we build. We uphold transparency,

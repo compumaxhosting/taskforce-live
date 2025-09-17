@@ -260,12 +260,12 @@ export default function ContactUs() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-8">
         {/* Left - Contact Form */}
         <div className="pb-10">
-          <h2
+          <h1
             className="text-3xl md:text-5xl text-center text-[#c18832] mb-2"
             id="contact-form-heading"
           >
             Send Us A Message
-          </h2>
+          </h1>
           <p
             className="text-center text-gray-600 mb-10 font-open-sans"
             id="contact-form-desc"

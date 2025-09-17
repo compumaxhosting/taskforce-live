@@ -92,16 +92,16 @@ export default function ProcessManufacturing() {
     <section className="w-full">
       <div className="mx-auto max-w-6xl">
         <header className="mb-6 text-center">
-          <h2 className="text-3xl md:text-5xl text-gray-800 text-center">
+          <h1 className="text-3xl md:text-5xl text-gray-800 text-center">
             <span className="bg-[#e6f0ef] text-[#c28b2c] px-2 mr-2">
               Standard Operating Process –
             </span>
             <span className="text-black"> Manufacturing</span>
-          </h2>
+          </h1>
 
-          <h3 className="text-xl md:text-2xl font-semibold text-gray-900 text-center pt-5 font-open-sans">
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900 text-center pt-5 font-open-sans">
             Follow the journey from material approval to final on-site assembly.
-          </h3>
+          </h2>
         </header>
 
         {/* Aspect box for responsive SVG */}
