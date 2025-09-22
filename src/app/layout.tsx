@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: "Taskforce Interiors",
     images: [
       {
-        url: "/og-image.jpg", // replace with your logo or banner path
+        url: "/logo.png", // replace with your logo or banner path
         width: 1200,
         height: 630,
         alt: "Taskforce Interiors",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Taskforce Interiors | Interior Fit-out Experts",
     description:
       "Transforming spaces into functional, aesthetically refined environments.",
-    images: ["/og-image.jpg"], // same as above
+    images: ["/logo.png"], // same as above
   },
 };
 
